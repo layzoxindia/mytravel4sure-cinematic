@@ -1,106 +1,15 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071218">
-<meta name="description" content="MyTravel4Sure — enter a destination before you book it. An immersive spatial travel preview.">
-<meta name="robots" content="index,follow">
-<meta property="og:title" content="MyTravel4Sure — Enter the Destination">
-<meta property="og:description" content="Choose a place and step inside its atmosphere before you plan the trip.">
-<meta property="og:type" content="website">
-<title>MyTravel4Sure — Enter the Destination</title>
-<link rel="icon" href="assets/mytravel4sure-logo.png">
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#020617" />
+  <meta name="description" content="MyTravel4Sure — enter the destination before you book it." />
+  <meta name="robots" content="index,follow" />
+  <title>MyTravel4Sure — Destination Portal</title>
 </head>
 <body>
-<canvas id="webgl" aria-hidden="true"></canvas>
-<div class="vignette"></div><div class="grain"></div><div class="scan"></div>
-
-<div class="loader">
-  <div class="loader-inner">
-    <img class="loader-logo" src="assets/mytravel4sure-logo.png" alt="MyTravel4Sure">
-    <div class="loader-label">Preparing destination space</div>
-    <div class="loader-track"><div class="loader-bar"></div></div>
-    <div class="loader-percent">0%</div>
-  </div>
-</div>
-
-<div class="ui">
-  <header class="topbar">
-    <div class="brand">
-      <img src="assets/mytravel4sure-logo.png" alt="MyTravel4Sure">
-      <span class="system-id">IMMERSIVE TRAVEL PREVIEW / SPATIAL EXPERIENCE</span>
-    </div>
-    <div class="top-actions">
-      <button class="pill secondary" id="sound"><span class="sound-bars"><i></i><i></i><i></i></span>Atmosphere</button>
-      <button class="pill primary open-trip">Build this journey</button>
-    </div>
-  </header>
-
-  <div class="status"><i></i><span id="statusText">DESTINATION PORTAL READY</span></div>
-
-  <main class="copy">
-    <div class="eyebrow" id="eyebrow">KASHMIR / INDIA / SCENE 01</div>
-    <h1 id="title">KASHMIR<em id="script">closer to the sky.</em></h1>
-    <p id="sceneCopy">Cold air, glassy water and mountains that make the rest of the world feel very far away.</p>
-  </main>
-
-  <aside class="side-meta">
-    <div class="micro">CURRENT ATMOSPHERE</div>
-    <strong id="mood">ALPINE / STILL / COLD LIGHT</strong>
-    <div class="rule"></div>
-    <p>Move through the view with your cursor or touch. Scroll or swipe to travel between moments.</p>
-  </aside>
-
-  <div class="crosshair"></div>
-
-  <div class="scene-rail" aria-label="Destination scenes"></div>
-
-  <section class="destination-orbit" aria-label="Choose a destination">
-    <div class="orbit-kicker">MYTRAVEL4SURE / DESTINATION PORTAL</div>
-    <div class="orbit-title">Don't browse a place.<br><em>Enter it.</em></div>
-    <div class="dest-list">
-      <button class="dest" data-dest="kashmir"><small>01 / INDIA</small><strong>Kashmir</strong><em>snow · lake · alpine silence</em></button>
-      <button class="dest" data-dest="maldives"><small>02 / INDIAN OCEAN</small><strong>Maldives</strong><em>lagoon · reef · barefoot time</em></button>
-      <button class="dest" data-dest="bali"><small>03 / INDONESIA</small><strong>Bali</strong><em>jungle · ritual · warm air</em></button>
-      <button class="dest" data-dest="dubai"><small>04 / UAE</small><strong>Dubai</strong><em>desert · future · after dark</em></button>
-    </div>
-  </section>
-
-  <button class="change-destination">Change destination</button>
-
-  <div class="hotspot" aria-hidden="false">
-    <button aria-label="Travel deeper into this destination"></button>
-    <span class="hotspot-label">ENTER NEXT SCENE</span>
-  </div>
-
-  <div class="portal"><div class="portal-word">KASHMIR</div></div>
-
-  <aside class="trip-panel" aria-label="Build your trip">
-    <div class="trip-head">
-      <img src="assets/mytravel4sure-logo.png" alt="MyTravel4Sure">
-      <button class="trip-close" aria-label="Close trip planner">×</button>
-    </div>
-    <h2>Turn the feeling into a trip.</h2>
-    <p>The destination and the visual moment you selected are carried into your enquiry automatically. Add the practical details and continue on WhatsApp.</p>
-    <div class="field"><b>01</b><label for="fDest">Destination</label><input id="fDest" value="KASHMIR" readonly></div>
-    <div class="field"><b>02</b><label for="fFrom">Starting city</label><input id="fFrom" value="Delhi"></div>
-    <div class="field"><b>03</b><label for="fStyle">Travel style</label><select id="fStyle"><option>Couple / honeymoon</option><option>Family holiday</option><option>Friends trip</option><option>Solo escape</option></select></div>
-    <div class="field"><b>04</b><label for="fDays">Duration</label><select id="fDays"><option>3–4 nights</option><option>5–7 nights</option><option>8–10 nights</option><option>10+ nights</option></select></div>
-    <div class="field"><b>05</b><label for="fName">Name</label><input id="fName" autocomplete="name" placeholder="Your name"></div>
-    <div class="field"><b>06</b><label for="fPhone">Phone / WhatsApp</label><input id="fPhone" autocomplete="tel" inputmode="tel" placeholder="+91…"></div>
-    <button class="whatsapp" id="whatsapp">Continue on WhatsApp →</button>
-    <div class="fine">No payment is taken on this screen.</div>
-  </aside>
-</div>
-
-<div class="fallback">
-  <div><h2>Your browser can't open the spatial preview.</h2><p>Please use a recent version of Chrome, Edge, Safari or Firefox with hardware acceleration enabled.</p></div>
-</div>
-
-<script type="module" src="app.js"></script>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
 </body>
 </html>
