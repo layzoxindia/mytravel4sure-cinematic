@@ -42,13 +42,54 @@ a{color:inherit;text-decoration:none}button,input,select{font:inherit}button{cur
 @media(max-width:620px){.topbar{top:8px}.topbar img{width:145px;height:44px}.scene h1{font-size:58px}.scene h2{font-size:48px}.scene p{font-size:16px}.scene-inner{padding:110px 0 46px}.wrap{width:min(100% - 24px,1180px)}.destination-reel{padding:78px 0}.reel-item{height:58vh;min-width:90vw}.planner-grid{grid-template-columns:1fr}.wide{grid-column:auto}.story-grid{grid-template-columns:1fr}.transition-band{height:32vh}.film-count{top:100px}.floating{bottom:12px;right:12px}.floating a,.chat-btn{width:50px;height:50px}.chat{left:8px;right:8px;bottom:72px;width:auto;height:64vh}.modal-grid{grid-template-columns:1fr}.modal-grid .full{grid-column:auto}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
-</head>
+
+<style id="cinema-v2">
+:root{--ease:cubic-bezier(.16,1,.3,1)}
+body{background:#04141d}
+.topbar{transition:transform .6s var(--ease),background .4s;mix-blend-mode:normal}
+.topbar.scrolled{background:rgba(4,20,29,.72);transform:translateX(-50%) scale(.98)}
+.scene{min-height:112svh}
+.scene .bg{will-change:transform,filter;transition:none}
+.scene-inner{will-change:transform,opacity}
+.cinema-index{position:fixed;left:22px;top:50%;transform:translateY(-50%);z-index:80;display:grid;gap:11px}
+.cinema-index button{width:7px;height:7px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.28);transition:.35s var(--ease)}
+.cinema-index button.on{height:34px;border-radius:9px;background:#fff}
+.hero-orbit{position:absolute;width:min(48vw,690px);aspect-ratio:1;border:1px solid rgba(255,255,255,.18);border-radius:50%;right:-10vw;top:8vh;z-index:-1;animation:orbit 18s linear infinite}
+.hero-orbit:after{content:"";position:absolute;width:12px;height:12px;background:#ffd34e;border-radius:50%;left:8%;top:22%;box-shadow:0 0 35px #ffd34e}
+@keyframes orbit{to{transform:rotate(360deg)}}
+.hero-stamp{position:absolute;right:5vw;bottom:10vh;width:126px;height:126px;border-radius:50%;border:1px solid rgba(255,255,255,.35);display:grid;place-items:center;text-align:center;font-size:10px;letter-spacing:.18em;text-transform:uppercase;line-height:1.5;backdrop-filter:blur(12px);animation:floatStamp 4s ease-in-out infinite}
+@keyframes floatStamp{50%{transform:translateY(-14px) rotate(4deg)}}
+.scene h1,.scene h2{filter:blur(8px);transform:translateY(65px) scale(.985)}
+.scene.visible h1,.scene.visible h2{filter:blur(0);transform:none;transition:1.25s var(--ease)}
+.scene.visible .kicker,.scene.visible p,.scene.visible .scene-actions{transition-timing-function:var(--ease)}
+.word-split span{display:inline-block;will-change:transform}
+.reel-track{overflow:visible;gap:4vw;padding-right:12vw}
+.destination-reel{overflow:hidden;position:relative}
+.reel-item{min-width:min(68vw,900px);height:72vh;border-radius:2px;box-shadow:none}
+.reel-item:nth-child(even){margin-top:11vh}
+.reel-copy{bottom:34px}
+.reel-copy h3{font-size:clamp(50px,7vw,110px)}
+.transition-band{height:55vh;transform:skewY(-2deg);margin:-3vh 0}
+.transition-band .word{transform:skewY(2deg)}
+.planner-film{padding-top:150px}
+.planner-shell{perspective:1200px}
+.planner-form,.match-output{border-radius:4px}
+.story-grid{background:transparent;gap:0}
+.story-step{border-top:1px solid rgba(8,35,53,.16);min-height:370px;transition:.5s var(--ease)}
+.story-step:hover{transform:translateY(-14px);background:#f5fbfa}
+.cta-film:before,.cta-film:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.24);border-radius:50%;width:55vw;aspect-ratio:1}
+.cta-film:before{left:-22vw;top:-20vw}.cta-film:after{right:-26vw;bottom:-28vw}
+.cursor-glow{position:fixed;width:260px;height:260px;border-radius:50%;pointer-events:none;z-index:2;background:radial-gradient(circle,rgba(68,223,218,.13),transparent 68%);transform:translate(-50%,-50%);transition:opacity .3s}
+.scene-wipe{position:fixed;inset:0;z-index:70;pointer-events:none;background:linear-gradient(110deg,transparent 0 42%,rgba(255,255,255,.06) 48%,transparent 54%);transform:translateX(-120%)}
+@media(min-width:901px){.reel-track{transform:translateX(var(--reel-x,0px));transition:transform .08s linear}.destination-reel{min-height:105vh}.destination-reel .wrap{position:sticky;top:8vh}}
+@media(max-width:900px){.cinema-index{display:none}.hero-stamp{width:92px;height:92px;right:18px;bottom:22px}.hero-orbit{width:85vw;right:-42vw}.reel-item:nth-child(even){margin-top:0}.reel-track{overflow-x:auto}.reel-item{min-width:88vw;height:66vh}}
+</style></head>
 <body>
-<div class="grain"></div><div class="progress" id="progress"></div>
+<div class="grain"></div><div class="cursor-glow" id="cursorGlow"></div><div class="scene-wipe" id="sceneWipe"></div><nav class="cinema-index" aria-label="Story scenes"><button data-go="home" class="on"></button><button data-go="scene2"></button><button data-go="scene3"></button><button data-go="destinations"></button><button data-go="planner"></button></nav><div class="progress" id="progress"></div>
 <header class="topbar"><img src="assets/mytravel4sure-logo.png" alt="MyTravel4Sure"><div class="top-actions"><a class="pill" href="#destinations">Destinations</a><a class="pill" href="#planner">Planner</a><button class="pill primary open-enquiry">Plan holiday</button></div></header>
 
 <section class="scene hero-film visible" id="home">
-  <div class="bg"></div><div class="film-count">01 / 06</div>
+  <div class="bg"></div><div class="hero-orbit"></div><div class="hero-stamp">Made for<br>your story<br>↓ explore</div><div class="film-count">01 / 06</div>
   <div class="wrap scene-inner"><span class="kicker">MyTravel4Sure presents</span><h1>Travel like<br><span class="accent">a story.</span></h1><p>Not a catalogue. Not a template. A holiday that unfolds like a film — built around your mood, pace and the memories you want to bring back.</p><div class="scene-actions"><a class="btn light" href="#destinations">Start the journey</a><button class="btn glass open-enquiry">Plan my escape</button></div></div><div class="scrollhint">scroll to travel</div><div class="ribbon"></div>
 </section>
 
@@ -139,5 +180,29 @@ function addMsg(t,w='bot'){const d=document.createElement('div');d.className='ms
 function bot(q){const low=q.toLowerCase();if(/whatsapp|contact|phone/.test(low)){addMsg('Call +91 98109 58069 or use the WhatsApp button.');return}let region=/abroad|international/.test(low)?'Abroad':(/india|domestic/.test(low)?'India':null);let m=/honeymoon|romantic/.test(low)?'romance':/beach|island/.test(low)?'beach':/mountain|hill|nature/.test(low)?'mountain':/city|shopping/.test(low)?'city':'all';let arr=trips.filter(t=>!region||t.region===region).map(t=>({...t,s:score(t,m,'5–7 nights','2 travellers')})).sort((a,b)=>b.s-a.s).slice(0,5);addMsg('Best fits: '+arr.map(x=>x.place).join(', ')+'. Tap Plan in the trip matcher or open the holiday brief to continue.')}
 chatSend.onclick=()=>{const q=chatInput.value.trim();if(!q)return;addMsg(q,'user');chatInput.value='';setTimeout(()=>bot(q),180)};chatInput.onkeydown=e=>{if(e.key==='Enter')chatSend.click()};
 </script>
-</body>
+
+<script id="cinema-v2-js">
+const topbar=document.querySelector('.topbar'),glow=document.getElementById('cursorGlow'),wipe=document.getElementById('sceneWipe');
+let lastY=scrollY,raf=0;
+document.querySelectorAll('.cinema-index button').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.go)?.scrollIntoView({behavior:'smooth'}));
+if(matchMedia('(pointer:fine)').matches){addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'})}else glow.style.display='none';
+function cinematicTick(){
+ const y=scrollY,vh=innerHeight;
+ topbar.classList.toggle('scrolled',y>40);
+ document.querySelectorAll('.scene').forEach((s,i)=>{
+  const r=s.getBoundingClientRect(), p=Math.max(-1,Math.min(1,(vh/2-(r.top+r.height/2))/vh));
+  const bg=s.querySelector('.bg'),inner=s.querySelector('.scene-inner');
+  if(bg) bg.style.transform='scale('+(1.08-Math.abs(p)*.025)+') translate3d(0,'+(p*42)+'px,0)';
+  if(inner) inner.style.transform='translate3d(0,'+(p*-26)+'px,0)';
+ });
+ const reel=document.querySelector('.destination-reel'),track=reel?.querySelector('.reel-track');
+ if(reel&&track&&innerWidth>900){const r=reel.getBoundingClientRect(), prog=Math.max(0,Math.min(1,(vh-r.top)/(r.height+vh)));track.style.setProperty('--reel-x',(-prog*Math.max(0,track.scrollWidth-innerWidth*.76))+'px')}
+ const anchors=['home','scene2','scene3','destinations','planner'];let best=anchors[0],dist=1e9;
+ anchors.forEach(id=>{const el=document.getElementById(id);if(el){const d=Math.abs(el.getBoundingClientRect().top-vh*.28);if(d<dist){dist=d;best=id}}});
+ document.querySelectorAll('.cinema-index button').forEach(b=>b.classList.toggle('on',b.dataset.go===best));
+ lastY=y;raf=0;
+}
+addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(cinematicTick)},{passive:true});addEventListener('resize',cinematicTick);cinematicTick();
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',()=>{wipe.animate([{transform:'translateX(-120%)'},{transform:'translateX(120%)'}],{duration:900,easing:'cubic-bezier(.16,1,.3,1)'})}));
+</script></body>
 </html>
