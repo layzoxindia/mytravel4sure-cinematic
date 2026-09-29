@@ -1,208 +1,41 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071b2a">
-<meta name="description" content="MyTravel4Sure — cinematic, personalized holiday planning from Delhi to India and the world.">
-<title>MyTravel4Sure — Travel Like a Story</title>
-<link rel="icon" href="assets/mytravel4sure-logo.png">
-<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
-<style>
-:root{--teal:#08aaa9;--blue:#27a0bd;--yellow:#f7cb00;--orange:#ff9f00;--coral:#f33f24;--ink:#082335;--white:#fff}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:#071b2a;color:#fff;overflow-x:hidden}
-a{color:inherit;text-decoration:none}button,input,select{font:inherit}button{cursor:pointer}.grain{position:fixed;inset:0;pointer-events:none;z-index:1000;opacity:.17;mix-blend-mode:soft-light;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E")}
-.topbar{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:90;width:min(1180px,calc(100% - 28px));display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:22px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(18px)}
-.topbar img{width:185px;height:54px;object-fit:contain;background:#fff;border-radius:16px;padding:7px 10px}.top-actions{display:flex;gap:10px}.pill{border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.1);color:#fff;border-radius:999px;padding:12px 16px;font-weight:800}.pill.primary{background:linear-gradient(90deg,var(--teal),var(--blue));border:0}
-.progress{position:fixed;left:0;top:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--yellow),var(--coral));z-index:110;width:0}
-.scene{position:relative;min-height:100svh;display:grid;align-items:end;overflow:hidden;isolation:isolate}
-.bg{position:absolute;inset:0;z-index:-3;background-size:cover;background-position:center;transform:scale(1.08);transition:transform 1.4s cubic-bezier(.2,.8,.2,1),filter .8s}
-.scene.visible .bg{transform:scale(1)}.scene::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(2,15,24,.12) 5%,rgba(4,19,30,.32) 44%,rgba(4,17,27,.93) 100%)}
-.scene::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 75% 25%,rgba(255,188,54,.18),transparent 30rem)}
-.wrap{width:min(1180px,calc(100% - 40px));margin:auto}.scene-inner{padding:150px 0 70px}.kicker{font-size:12px;text-transform:uppercase;letter-spacing:.24em;font-weight:900;color:#b9e9ea;opacity:0;transform:translateY(18px);transition:.7s}
-.scene h1,.scene h2{margin:10px 0 16px;line-height:.9;letter-spacing:-.065em;max-width:980px;opacity:0;transform:translateY(36px);transition:.9s .08s}.scene h1{font-size:clamp(64px,9vw,142px)}.scene h2{font-size:clamp(48px,7vw,102px)}
-.scene p{max-width:700px;font-size:18px;line-height:1.65;color:rgba(255,255,255,.78);opacity:0;transform:translateY(24px);transition:.9s .16s}
-.scene.visible .kicker,.scene.visible h1,.scene.visible h2,.scene.visible p{opacity:1;transform:none}
-.accent{background:linear-gradient(90deg,#fff 0%,#aef7ff 35%,#ffd34e 68%,#ff784f 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.scene-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;opacity:0;transform:translateY(20px);transition:.8s .25s}.scene.visible .scene-actions{opacity:1;transform:none}.btn{border:0;border-radius:999px;padding:15px 22px;font-weight:900}.btn.light{background:#fff;color:#092536}.btn.glass{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(12px)}
-.scrollhint{position:absolute;right:24px;bottom:24px;font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:rgba(255,255,255,.52);writing-mode:vertical-rl}
-.ribbon{position:absolute;left:0;right:0;bottom:0;height:8px;background:linear-gradient(90deg,var(--teal),var(--blue),var(--yellow),var(--orange),var(--coral))}
-.hero-film .bg{animation:heroSwap 18s infinite;background-image:url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=88")}
-@keyframes heroSwap{0%,22%{background-image:url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=88")}25%,47%{background-image:url("https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=2000&q=88")}50%,72%{background-image:url("https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2000&q=88")}75%,100%{background-image:url("https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2000&q=88")}}
-.film-count{position:absolute;top:130px;right:4vw;font-size:12px;letter-spacing:.2em;color:rgba(255,255,255,.7)}
-.destination-reel{background:#f7f3eb;color:var(--ink);padding:110px 0}.destination-reel h2{font-size:clamp(48px,7vw,96px);line-height:.92;letter-spacing:-.06em;margin:0 0 35px}.reel-track{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none;padding-bottom:8px}.reel-track::-webkit-scrollbar{display:none}.reel-item{min-width:min(74vw,720px);height:64vh;position:relative;border-radius:34px;overflow:hidden;isolation:isolate;box-shadow:0 25px 70px rgba(12,38,50,.16);transition:.5s}.reel-item:hover{transform:translateY(-8px) scale(1.01)}.reel-item img{width:100%;height:100%;object-fit:cover}.reel-item::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 25%,rgba(4,18,28,.8));z-index:1}.reel-copy{position:absolute;z-index:2;left:30px;right:30px;bottom:28px;color:#fff}.reel-copy h3{font-size:clamp(38px,5vw,70px);margin:0 0 7px;letter-spacing:-.05em}.reel-copy p{margin:0 0 16px;color:rgba(255,255,255,.82)}.reel-copy button{border:0;border-radius:999px;padding:12px 16px;font-weight:900}
-.transition-band{height:42vh;display:grid;place-items:center;background:linear-gradient(125deg,#08aaa9,#177cc4 42%,#6b4fd3 68%,#ff7350);overflow:hidden;position:relative}.transition-band .word{font-size:clamp(58px,12vw,180px);font-weight:950;letter-spacing:-.08em;white-space:nowrap;animation:slideWord 9s linear infinite}@keyframes slideWord{from{transform:translateX(35%)}to{transform:translateX(-35%)}}
-.planner-film{background:#061d2c;padding:110px 0;position:relative;overflow:hidden}.planner-film::before{content:"";position:absolute;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,#ffab2e33,transparent 66%);right:-140px;top:-150px}.planner-film h2{font-size:clamp(46px,7vw,96px);letter-spacing:-.06em;line-height:.94;margin:0 0 25px}.planner-shell{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:22px;align-items:start}.planner-form{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(18px);border-radius:32px;padding:24px}.planner-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:900;color:#9bdfe2;margin:0 0 8px 3px}.field input,.field select{width:100%;height:50px;border-radius:15px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:#fff;padding:0 13px;outline:none}.field select option{color:#111}.wide{grid-column:1/-1}.match-output{min-height:330px;background:linear-gradient(145deg,#fff,#edf9fa);border-radius:32px;padding:28px;color:var(--ink)}.match-output h3{font-size:34px;letter-spacing:-.045em;margin:0 0 8px}.match-list{display:grid;gap:9px;margin-top:18px}.match-row{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:12px 14px;border:1px solid rgba(8,35,53,.1);border-radius:15px;background:#fff}.match-row b{display:block}.match-row small{color:#6d838d}.match-row button{border:0;border-radius:999px;padding:9px 12px;background:var(--teal);color:#fff;font-weight:900}
-.story-scene{background:#fff;color:var(--ink);padding:120px 0}.story-scene h2{font-size:clamp(50px,7vw,94px);line-height:.95;letter-spacing:-.06em;margin:0 0 36px}.story-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(8,35,53,.1)}.story-step{background:#fff;padding:36px 24px;min-height:310px;position:relative;overflow:hidden}.story-step span{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);font-weight:900}.story-step h3{font-size:28px;margin:15px 0 10px}.story-step p{color:#647c88;line-height:1.55}.story-step::after{content:"";position:absolute;right:-45px;bottom:-45px;width:130px;height:130px;border-radius:50%;background:var(--bubble,#d9f7f6)}
-.cta-film{min-height:86vh;display:grid;place-items:center;text-align:center;background:linear-gradient(140deg,#0a8497,#0cb0aa 42%,#1f7cc8 70%,#ff8b27);padding:90px 20px;position:relative;overflow:hidden}.cta-film h2{font-size:clamp(54px,9vw,130px);line-height:.88;letter-spacing:-.07em;margin:0;max-width:1100px}.cta-film p{max-width:650px;margin:22px auto;color:rgba(255,255,255,.8);font-size:18px}
-.floating{position:fixed;right:18px;bottom:18px;z-index:85;display:grid;gap:10px}.floating a,.chat-btn{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;border:0;color:#fff;box-shadow:0 16px 40px rgba(0,0,0,.22);font-weight:900}.floating a:first-child{background:#2aa2bd}.floating a:nth-child(2){background:#1fab5b}.chat-btn{background:linear-gradient(135deg,#ff9f00,#f33f24)}
-.chat{position:fixed;right:18px;bottom:88px;width:min(380px,calc(100vw - 28px));height:520px;z-index:120;background:#fff;color:var(--ink);border-radius:28px;box-shadow:0 30px 90px rgba(0,0,0,.28);display:none;grid-template-rows:auto 1fr auto;overflow:hidden}.chat.open{display:grid;animation:pop .25s ease}@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.97)}}.chat-head{padding:15px;background:linear-gradient(110deg,#087f91,#0aa8ad,#287fbf);color:#fff;display:flex;justify-content:space-between}.chat-body{padding:15px;overflow:auto;background:#f7fbfb}.msg{max-width:85%;padding:10px 12px;border-radius:14px;margin-bottom:9px;font-size:13px;line-height:1.45}.msg.bot{background:#fff;border:1px solid #dfe8eb}.msg.user{margin-left:auto;background:#0aa8ad;color:#fff}.chat-foot{padding:10px;border-top:1px solid #e6edef;display:grid;grid-template-columns:1fr auto;gap:8px}.chat-foot input{height:44px;border:1px solid #dfe8eb;border-radius:12px;padding:0 12px}.chat-foot button{width:44px;border:0;border-radius:12px;background:#0aa8ad;color:#fff}
-.modal{position:fixed;inset:0;z-index:140;background:rgba(1,10,16,.74);backdrop-filter:blur(10px);display:none;place-items:center;padding:18px}.modal.open{display:grid}.modal-card{width:min(620px,100%);background:#fff;color:var(--ink);border-radius:30px;padding:28px}.modal-card h3{font-size:32px;margin:0 0 16px}.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.modal-grid input,.modal-grid select{height:48px;border:1px solid #dbe6e9;border-radius:13px;padding:0 12px}.modal-grid .full{grid-column:1/-1}.close{float:right;border:0;background:#edf5f6;width:38px;height:38px;border-radius:50%}
-@media(max-width:900px){.top-actions .pill:not(.primary){display:none}.planner-shell{grid-template-columns:1fr}.story-grid{grid-template-columns:1fr 1fr}.scene-inner{padding-top:125px}.reel-item{min-width:86vw}}
-@media(max-width:620px){.topbar{top:8px}.topbar img{width:145px;height:44px}.scene h1{font-size:58px}.scene h2{font-size:48px}.scene p{font-size:16px}.scene-inner{padding:110px 0 46px}.wrap{width:min(100% - 24px,1180px)}.destination-reel{padding:78px 0}.reel-item{height:58vh;min-width:90vw}.planner-grid{grid-template-columns:1fr}.wide{grid-column:auto}.story-grid{grid-template-columns:1fr}.transition-band{height:32vh}.film-count{top:100px}.floating{bottom:12px;right:12px}.floating a,.chat-btn{width:50px;height:50px}.chat{left:8px;right:8px;bottom:72px;width:auto;height:64vh}.modal-grid{grid-template-columns:1fr}.modal-grid .full{grid-column:auto}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-</style>
-
-<style id="cinema-v2">
-:root{--ease:cubic-bezier(.16,1,.3,1)}
-body{background:#04141d}
-.topbar{transition:transform .6s var(--ease),background .4s;mix-blend-mode:normal}
-.topbar.scrolled{background:rgba(4,20,29,.72);transform:translateX(-50%) scale(.98)}
-.scene{min-height:112svh}
-.scene .bg{will-change:transform,filter;transition:none}
-.scene-inner{will-change:transform,opacity}
-.cinema-index{position:fixed;left:22px;top:50%;transform:translateY(-50%);z-index:80;display:grid;gap:11px}
-.cinema-index button{width:7px;height:7px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.28);transition:.35s var(--ease)}
-.cinema-index button.on{height:34px;border-radius:9px;background:#fff}
-.hero-orbit{position:absolute;width:min(48vw,690px);aspect-ratio:1;border:1px solid rgba(255,255,255,.18);border-radius:50%;right:-10vw;top:8vh;z-index:-1;animation:orbit 18s linear infinite}
-.hero-orbit:after{content:"";position:absolute;width:12px;height:12px;background:#ffd34e;border-radius:50%;left:8%;top:22%;box-shadow:0 0 35px #ffd34e}
-@keyframes orbit{to{transform:rotate(360deg)}}
-.hero-stamp{position:absolute;right:5vw;bottom:10vh;width:126px;height:126px;border-radius:50%;border:1px solid rgba(255,255,255,.35);display:grid;place-items:center;text-align:center;font-size:10px;letter-spacing:.18em;text-transform:uppercase;line-height:1.5;backdrop-filter:blur(12px);animation:floatStamp 4s ease-in-out infinite}
-@keyframes floatStamp{50%{transform:translateY(-14px) rotate(4deg)}}
-.scene h1,.scene h2{filter:blur(8px);transform:translateY(65px) scale(.985)}
-.scene.visible h1,.scene.visible h2{filter:blur(0);transform:none;transition:1.25s var(--ease)}
-.scene.visible .kicker,.scene.visible p,.scene.visible .scene-actions{transition-timing-function:var(--ease)}
-.word-split span{display:inline-block;will-change:transform}
-.reel-track{overflow:visible;gap:4vw;padding-right:12vw}
-.destination-reel{overflow:hidden;position:relative}
-.reel-item{min-width:min(68vw,900px);height:72vh;border-radius:2px;box-shadow:none}
-.reel-item:nth-child(even){margin-top:11vh}
-.reel-copy{bottom:34px}
-.reel-copy h3{font-size:clamp(50px,7vw,110px)}
-.transition-band{height:55vh;transform:skewY(-2deg);margin:-3vh 0}
-.transition-band .word{transform:skewY(2deg)}
-.planner-film{padding-top:150px}
-.planner-shell{perspective:1200px}
-.planner-form,.match-output{border-radius:4px}
-.story-grid{background:transparent;gap:0}
-.story-step{border-top:1px solid rgba(8,35,53,.16);min-height:370px;transition:.5s var(--ease)}
-.story-step:hover{transform:translateY(-14px);background:#f5fbfa}
-.cta-film:before,.cta-film:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.24);border-radius:50%;width:55vw;aspect-ratio:1}
-.cta-film:before{left:-22vw;top:-20vw}.cta-film:after{right:-26vw;bottom:-28vw}
-.cursor-glow{position:fixed;width:260px;height:260px;border-radius:50%;pointer-events:none;z-index:2;background:radial-gradient(circle,rgba(68,223,218,.13),transparent 68%);transform:translate(-50%,-50%);transition:opacity .3s}
-.scene-wipe{position:fixed;inset:0;z-index:70;pointer-events:none;background:linear-gradient(110deg,transparent 0 42%,rgba(255,255,255,.06) 48%,transparent 54%);transform:translateX(-120%)}
-@media(min-width:901px){.reel-track{transform:translateX(var(--reel-x,0px));transition:transform .08s linear}.destination-reel{min-height:105vh}.destination-reel .wrap{position:sticky;top:8vh}}
-@media(max-width:900px){.cinema-index{display:none}.hero-stamp{width:92px;height:92px;right:18px;bottom:22px}.hero-orbit{width:85vw;right:-42vw}.reel-item:nth-child(even){margin-top:0}.reel-track{overflow-x:auto}.reel-item{min-width:88vw;height:66vh}}
-</style></head>
-<body>
-<div class="grain"></div><div class="cursor-glow" id="cursorGlow"></div><div class="scene-wipe" id="sceneWipe"></div><nav class="cinema-index" aria-label="Story scenes"><button data-go="home" class="on"></button><button data-go="scene2"></button><button data-go="scene3"></button><button data-go="destinations"></button><button data-go="planner"></button></nav><div class="progress" id="progress"></div>
-<header class="topbar"><img src="assets/mytravel4sure-logo.png" alt="MyTravel4Sure"><div class="top-actions"><a class="pill" href="#destinations">Destinations</a><a class="pill" href="#planner">Planner</a><button class="pill primary open-enquiry">Plan holiday</button></div></header>
-
-<section class="scene hero-film visible" id="home">
-  <div class="bg"></div><div class="hero-orbit"></div><div class="hero-stamp">Made for<br>your story<br>↓ explore</div><div class="film-count">01 / 06</div>
-  <div class="wrap scene-inner"><span class="kicker">MyTravel4Sure presents</span><h1>Travel like<br><span class="accent">a story.</span></h1><p>Not a catalogue. Not a template. A holiday that unfolds like a film — built around your mood, pace and the memories you want to bring back.</p><div class="scene-actions"><a class="btn light" href="#destinations">Start the journey</a><button class="btn glass open-enquiry">Plan my escape</button></div></div><div class="scrollhint">scroll to travel</div><div class="ribbon"></div>
-</section>
-
-<section class="scene" id="scene2">
-  <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=2000&q=88')"></div><div class="film-count">02 / 06</div>
-  <div class="wrap scene-inner"><span class="kicker">Scene two • unplug</span><h2>Some places<br>slow time down.</h2><p>Blue water. Long breakfasts. No rush. We shape beach holidays around the feeling you actually want.</p><div class="scene-actions"><button class="btn light plan-place" data-place="Maldives">Plan Maldives</button><button class="btn glass plan-place" data-place="Andaman">Plan Andaman</button></div></div>
-</section>
-
-<section class="scene" id="scene3">
-  <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2000&q=88')"></div><div class="film-count">03 / 06</div>
-  <div class="wrap scene-inner"><span class="kicker">Scene three • explore</span><h2>Then some places<br>turn the energy up.</h2><p>City lights, desert sunsets, food, shopping, culture — compact itineraries with zero wasted days.</p><div class="scene-actions"><button class="btn light plan-place" data-place="Dubai">Plan Dubai</button><button class="btn glass plan-place" data-place="Singapore">Plan Singapore</button></div></div>
-</section>
-
-<section class="destination-reel" id="destinations">
-  <div class="wrap"><span style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:900;color:#17899a">Destination reel</span><h2>Pick the frame<br>you want to live in.</h2>
-    <div class="reel-track">
-      <article class="reel-item"><img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1400&q=88" alt="Maldives"><div class="reel-copy"><h3>Maldives</h3><p>Lagoon mornings • private time • barefoot evenings</p><button class="plan-place" data-place="Maldives">Plan this trip</button></div></article>
-      <article class="reel-item"><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1400&q=88" alt="Dubai"><div class="reel-copy"><h3>Dubai</h3><p>Skyline stays • desert sunset • polished nights</p><button class="plan-place" data-place="Dubai">Plan this trip</button></div></article>
-      <article class="reel-item"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1400&q=88" alt="Bali"><div class="reel-copy"><h3>Bali</h3><p>Rice fields • beaches • temples • wellness</p><button class="plan-place" data-place="Bali">Plan this trip</button></div></article>
-      <article class="reel-item"><img src="https://images.unsplash.com/photo-1598091383021-15ddea10925d?auto=format&fit=crop&w=1400&q=88" alt="Kashmir"><div class="reel-copy"><h3>Kashmir</h3><p>Valleys • lakes • mountain air • unhurried days</p><button class="plan-place" data-place="Kashmir">Plan this trip</button></div></article>
-    </div>
-  </div>
-</section>
-
-<section class="transition-band"><div class="word">INDIA • ISLANDS • CITIES • MOUNTAINS • HONEYMOONS •</div></section>
-
-<section class="planner-film" id="planner">
-  <div class="wrap"><span class="kicker" style="opacity:1;transform:none">smart trip matcher</span><h2>Tell us the mood.<br>We’ll shape the route.</h2>
-    <div class="planner-shell">
-      <div class="planner-form"><div class="planner-grid">
-        <div class="field"><label>Where from</label><input id="origin" value="Delhi"></div>
-        <div class="field"><label>Mood</label><select id="mood"><option value="all">Surprise me</option><option value="beach">Beach & island</option><option value="mountain">Mountain & nature</option><option value="city">City & culture</option><option value="romance">Romantic escape</option></select></div>
-        <div class="field"><label>Duration</label><select id="duration"><option>3–4 nights</option><option>5–7 nights</option><option>8–10 nights</option><option>10+ nights</option></select></div>
-        <div class="field"><label>Travellers</label><select id="travellers"><option>2 travellers</option><option>Solo</option><option>Family</option><option>Friends group</option></select></div>
-        <button class="btn light wide" id="matchBtn">Show my matches</button>
-      </div></div>
-      <div class="match-output"><span style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:900;color:#0aa8ad">Your shortlist</span><h3 id="matchTitle">Your film starts here.</h3><p id="matchSub" style="color:#617b86">Choose your mood and duration to reveal the strongest-fit trips.</p><div class="match-list" id="matchList"></div></div>
-    </div>
-  </div>
-</section>
-
-<section class="story-scene"><div class="wrap"><h2>From idea<br>to boarding pass.</h2><div class="story-grid">
-  <div class="story-step" style="--bubble:#dff8f7"><span>01 • discover</span><h3>Tell us the feeling</h3><p>Dates, people, pace, interests and must-have moments.</p></div>
-  <div class="story-step" style="--bubble:#fff4c8"><span>02 • curate</span><h3>Shape the route</h3><p>We narrow choices into a focused plan instead of overwhelming you.</p></div>
-  <div class="story-step" style="--bubble:#ffe2d6"><span>03 • refine</span><h3>Make it yours</h3><p>Adjust stays, pacing and experiences before you lock anything.</p></div>
-  <div class="story-step" style="--bubble:#e4e0ff"><span>04 • travel</span><h3>Live the story</h3><p>One clear itinerary, direct support and less chaos while travelling.</p></div>
-</div></div></section>
-
-<section class="cta-film"><div><h2>Your next<br>“remember when…”<br>starts here.</h2><p>Tell us where your head is at. We’ll turn it into a holiday worth remembering.</p><button class="btn light open-enquiry">Start my holiday brief</button></div></section>
-
-<div class="floating"><a href="tel:+919810958069" aria-label="Call">☎</a><a href="https://wa.me/919810958069?text=Hi%20MyTravel4Sure%2C%20I%20want%20to%20plan%20a%20holiday." target="_blank" rel="noopener" aria-label="WhatsApp">W</a><button class="chat-btn" id="chatBtn" aria-label="Chat">AI</button></div>
-
-<div class="chat" id="chat"><div class="chat-head"><div><b>Holiday Assistant</b><small style="display:block;opacity:.75">Smart trip help</small></div><button id="chatClose" style="border:0;background:transparent;color:#fff;font-size:20px">×</button></div><div class="chat-body" id="chatBody"><div class="msg bot">Tell me what you want — try “5 nights honeymoon abroad” or “family trip in India”.</div></div><div class="chat-foot"><input id="chatInput" placeholder="Ask about your holiday…"><button id="chatSend">➜</button></div></div>
-
-<div class="modal" id="modal"><div class="modal-card"><button class="close" id="closeModal">×</button><h3>Build your holiday brief</h3><div class="modal-grid"><input id="name" placeholder="Your name"><input id="phone" placeholder="Phone / WhatsApp"><input class="full" id="destination" placeholder="Destination / idea"><select id="tripMood"><option>Beach & island</option><option>Mountain & nature</option><option>City & culture</option><option>Romantic escape</option><option>Family holiday</option></select><input id="dates" placeholder="Preferred dates"><button class="btn light full" id="sendWa">Send on WhatsApp</button></div></div></div>
-
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#06131a"><meta name="description" content="MyTravel4Sure — cinematic personalized holidays."><title>MyTravel4Sure — The World, Cut Your Way</title><link rel="icon" href="assets/mytravel4sure-logo.png"><link rel="preconnect" href="https://images.unsplash.com"><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#06131a;color:#fff;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}button,input,select{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}:root{--cyan:#28c6c8;--sun:#ffd037;--coral:#ff5f45;--ease:cubic-bezier(.16,1,.3,1)}
+.noise{position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.08;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+nav{position:fixed;z-index:90;top:22px;left:28px;right:28px;display:flex;justify-content:space-between;align-items:center;mix-blend-mode:normal}nav img{width:178px;height:54px;object-fit:contain;background:#fff;border-radius:999px;padding:7px 13px}nav .right{display:flex;gap:10px}.navbtn{border:1px solid #ffffff4a;background:#0b2027aa;backdrop-filter:blur(15px);color:#fff;padding:13px 18px;border-radius:999px;font-weight:800}.navbtn.hot{background:#fff;color:#07151c}
+.progress{position:fixed;z-index:110;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--cyan),var(--sun),var(--coral))}
+.hero{height:300vh;position:relative}.heroStage{height:100svh;position:sticky;top:0;overflow:hidden;background:#06131a}.shot{position:absolute;inset:-5%;background-size:cover;background-position:center;will-change:transform,opacity,clip-path}.shot.a{background-image:linear-gradient(90deg,#03101688,#03101622),url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2200&q=90')}.shot.b{background-image:linear-gradient(90deg,#03101677,#03101611),url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=2200&q=90');clip-path:inset(0 0 0 100%)}.shot.c{background-image:linear-gradient(90deg,#03101688,#03101611),url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2200&q=90');clip-path:circle(0% at 78% 48%)}
+.heroCopy{position:absolute;left:6vw;bottom:10vh;z-index:8;width:min(1050px,88vw)}.eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;font-weight:900}.hero h1{font-size:clamp(70px,11vw,176px);line-height:.78;letter-spacing:-.085em;margin:14px 0 20px;text-transform:uppercase}.hero h1 i{font-family:Georgia,serif;font-weight:400;text-transform:none;color:#d9ffff}.hero p{max-width:610px;font-size:17px;line-height:1.6;color:#ffffffc7}.sceneNo{position:absolute;right:4vw;bottom:7vh;font-size:11px;letter-spacing:.22em;z-index:9}.ring{position:absolute;right:-8vw;top:-10vw;width:48vw;aspect-ratio:1;border:1px solid #ffffff4a;border-radius:50%;z-index:5}.ring:after{content:"";position:absolute;width:13px;height:13px;border-radius:50%;background:var(--sun);left:12%;top:25%;box-shadow:0 0 40px var(--sun)}
+.manifesto{min-height:100vh;background:#f3efe6;color:#102b34;display:grid;place-items:center;padding:12vh 6vw;overflow:hidden}.manifestoInner{width:min(1400px,100%)}.manifesto .small{font-size:11px;letter-spacing:.25em;text-transform:uppercase}.manifesto h2{font-size:clamp(52px,8vw,126px);line-height:.9;letter-spacing:-.07em;margin:20px 0}.manifesto h2 span{display:block}.manifesto h2 span:nth-child(2){margin-left:14vw;color:#169da4}.manifesto h2 span:nth-child(3){margin-left:4vw;font-family:Georgia,serif;font-style:italic;font-weight:400;color:#e95d3e}.manifesto p{width:min(520px,90%);margin-left:auto;font-size:18px;line-height:1.7;color:#506970}
+.journey{height:450vh;position:relative;background:#071820}.journeyStage{position:sticky;top:0;height:100svh;overflow:hidden}.place{position:absolute;inset:0;opacity:0;transform:scale(1.18);transition:opacity .25s}.place.on{opacity:1}.place img{width:100%;height:100%;object-fit:cover}.place:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#041117d9 0%,#04111755 48%,transparent 78%),linear-gradient(0deg,#041117bb,transparent 50%)}.placeCopy{position:absolute;z-index:5;left:6vw;bottom:9vh;width:min(800px,88vw)}.placeCopy .num{font-size:11px;letter-spacing:.24em}.placeCopy h3{font-size:clamp(72px,11vw,175px);line-height:.8;letter-spacing:-.08em;margin:10px 0}.placeCopy p{font-size:17px;line-height:1.6;max-width:520px;color:#ffffffc7}.placeCopy button{margin-top:18px;border:0;background:#fff;color:#09202a;border-radius:999px;padding:14px 19px;font-weight:900}.placeLabel{position:absolute;right:4vw;top:50%;z-index:6;transform:rotate(90deg);font-size:11px;letter-spacing:.3em;text-transform:uppercase}
+.cut{height:52vh;background:linear-gradient(120deg,#0aa9ad,#237ac4 50%,#ff714f);overflow:hidden;display:grid;align-items:center;transform:skewY(-2deg);margin:-2vh 0}.ticker{font-size:clamp(80px,14vw,220px);font-weight:900;letter-spacing:-.08em;white-space:nowrap;animation:ticker 16s linear infinite;transform:skewY(2deg)}@keyframes ticker{to{translate:-50% 0}}
+.planner{min-height:100vh;background:#f5f0e8;color:#0a2935;padding:13vh 6vw}.plannerHead{display:grid;grid-template-columns:1.2fr .8fr;gap:7vw;align-items:end}.planner h2{font-size:clamp(55px,8vw,120px);line-height:.85;letter-spacing:-.07em;margin:0}.plannerHead p{font-size:18px;line-height:1.7;color:#536b74}.brief{margin-top:8vh;border-top:1px solid #163b4930}.row{display:grid;grid-template-columns:70px 1fr 1fr;align-items:center;gap:3vw;padding:27px 0;border-bottom:1px solid #163b4930}.row b{font-size:12px;color:#159ca4}.row label{font-size:clamp(25px,3vw,46px);letter-spacing:-.04em;font-weight:800}.row input,.row select{border:0;border-bottom:1px solid #173b49;background:transparent;padding:13px 0;font-size:18px;color:#173b49;outline:0}.send{margin-top:35px;border:0;border-radius:999px;background:#092833;color:#fff;padding:18px 26px;font-weight:900}
+.final{min-height:100svh;display:grid;place-items:center;text-align:center;padding:10vh 5vw;background:radial-gradient(circle at 50% 45%,#127f8b,#061820 62%);position:relative;overflow:hidden}.final h2{font-size:clamp(70px,11vw,170px);line-height:.78;letter-spacing:-.08em;margin:0}.final h2 em{font-family:Georgia,serif;font-weight:400;color:#ffd74d}.final p{max-width:620px;margin:28px auto;color:#ffffffbb;line-height:1.7}.final button{border:0;background:#fff;color:#09212a;padding:16px 24px;border-radius:999px;font-weight:900}
+.modal{position:fixed;inset:0;z-index:200;background:#031017dd;backdrop-filter:blur(15px);display:none;place-items:center;padding:20px}.modal.on{display:grid}.modalBox{width:min(600px,100%);background:#f5f0e8;color:#0a2935;padding:35px}.modalBox h3{font-size:40px;margin:0 0 25px;letter-spacing:-.05em}.modalBox input,.modalBox select{width:100%;height:52px;margin:6px 0;border:1px solid #173b4933;background:#fff;padding:0 13px}.modalBox button{border:0;padding:14px 18px;font-weight:900}.modalBox .wa{width:100%;background:#0b9d86;color:#fff;margin-top:10px}.close{float:right;background:transparent;font-size:22px}
+@media(max-width:700px){nav{left:12px;right:12px;top:10px}nav img{width:145px;height:45px}.navbtn:not(.hot){display:none}.hero h1{font-size:20vw}.heroCopy{left:18px;bottom:9vh}.ring{width:90vw;right:-50vw}.manifesto{padding-inline:20px}.manifesto h2 span:nth-child(2),.manifesto h2 span:nth-child(3){margin-left:0}.placeCopy{left:18px}.placeCopy h3{font-size:22vw}.planner{padding:10vh 20px}.plannerHead{grid-template-columns:1fr}.row{grid-template-columns:38px 1fr}.row input,.row select{grid-column:2}.final h2{font-size:21vw}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style></head><body><div class="noise"></div><div class="progress" id="progress"></div>
+<nav><img src="assets/mytravel4sure-logo.png" alt="MyTravel4Sure"><div class="right"><a class="navbtn" href="#journey">Explore</a><button class="navbtn hot open">Plan a journey</button></div></nav>
+<section class="hero" id="home"><div class="heroStage"><div class="shot a" id="a"></div><div class="shot b" id="b"></div><div class="shot c" id="c"></div><div class="ring" id="ring"></div><div class="heroCopy" id="heroCopy"><div class="eyebrow">MYTRAVEL4SURE / A JOURNEY IN MOTION</div><h1>DON'T JUST<br>GO. <i>Arrive.</i></h1><p>Your holiday shouldn't feel selected from a catalogue. It should unfold — one mood, one frame, one unforgettable cut at a time.</p></div><div class="sceneNo">SCROLL / 01—03</div></div></section>
+<section class="manifesto"><div class="manifestoInner"><div class="small">WE DESIGN THE FEELING FIRST</div><h2><span>LESS ITINERARY.</span><span>MORE INSTINCT.</span><span>More you.</span></h2><p>Tell us the pace you want, the people you're with and what you want to feel. We turn that into a route with room to breathe.</p></div></section>
+<section class="journey" id="journey"><div class="journeyStage">
+<div class="place on" data-i="0"><img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=2200&q=90"><div class="placeCopy"><div class="num">01 / BAREFOOT</div><h3>MALDIVES</h3><p>Wake over water. Lose the clock. Let the horizon do most of the talking.</p><button class="pick" data-place="Maldives">Make this mine</button></div><div class="placeLabel">island state of mind</div></div>
+<div class="place" data-i="1"><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2200&q=90"><div class="placeCopy"><div class="num">02 / ELECTRIC</div><h3>DUBAI</h3><p>Skyline mornings. Desert gold. A city that changes tempo before you do.</p><button class="pick" data-place="Dubai">Make this mine</button></div><div class="placeLabel">city after dark</div></div>
+<div class="place" data-i="2"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2200&q=90"><div class="placeCopy"><div class="num">03 / SLOW</div><h3>BALI</h3><p>Green mornings, salt air and a softer rhythm between the two.</p><button class="pick" data-place="Bali">Make this mine</button></div><div class="placeLabel">breathe differently</div></div>
+<div class="place" data-i="3"><img src="https://images.unsplash.com/photo-1598091383021-15ddea10925d?auto=format&fit=crop&w=2200&q=90"><div class="placeCopy"><div class="num">04 / WILD</div><h3>KASHMIR</h3><p>Cold air, impossible valleys and the kind of silence that stays with you.</p><button class="pick" data-place="Kashmir">Make this mine</button></div><div class="placeLabel">closer to the sky</div></div>
+</div></section>
+<section class="cut"><div class="ticker">SEA / CITY / MOUNTAIN / DESERT / CULTURE / ESCAPE / SEA / CITY / MOUNTAIN / DESERT /</div></section>
+<section class="planner" id="planner"><div class="plannerHead"><h2>YOUR FILM.<br>YOUR ROUTE.</h2><p>No endless package grid. Give us four signals and continue directly on WhatsApp with your holiday brief.</p></div><div class="brief">
+<div class="row"><b>01</b><label>Start from</label><input id="from" value="Delhi" aria-label="Starting city"></div>
+<div class="row"><b>02</b><label>Travel mood</label><select id="mood"><option>Romantic escape</option><option>Beach & slow</option><option>Mountains & nature</option><option>City & culture</option><option>Family time</option></select></div>
+<div class="row"><b>03</b><label>How long?</label><select id="days"><option>3–4 nights</option><option>5–7 nights</option><option>8–10 nights</option><option>10+ nights</option></select></div>
+<div class="row"><b>04</b><label>Destination idea</label><input id="where" placeholder="Surprise me / Maldives / Kashmir…"></div>
+<button class="send" id="brief">Continue on WhatsApp →</button></div></section>
+<section class="final"><div><h2>GO SOMEWHERE<br><em>worth remembering.</em></h2><p>The best journeys don't begin with a package. They begin with a feeling.</p><button class="open">Start your holiday</button></div></section>
+<div class="modal" id="modal"><div class="modalBox"><button class="close" id="close">×</button><h3>Start with a feeling.</h3><input id="name" placeholder="Your name"><input id="phone" placeholder="Phone / WhatsApp"><input id="dest" placeholder="Where do you want to go?"><select id="type"><option>Couple / honeymoon</option><option>Family holiday</option><option>Friends trip</option><option>Solo escape</option></select><button class="wa" id="wa">Continue on WhatsApp</button></div></div>
 <script>
-const PHONE='919810958069';
-const scenes=[...document.querySelectorAll('.scene')];
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.35});scenes.forEach(s=>io.observe(s));
-addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-innerHeight;document.getElementById('progress').style.width=(scrollY/h*100)+'%'});
-
-const modal=document.getElementById('modal');
-function openBrief(place=''){modal.classList.add('open');document.body.style.overflow='hidden';destination.value=place}
-function closeBrief(){modal.classList.remove('open');document.body.style.overflow=''}
-document.querySelectorAll('.open-enquiry').forEach(b=>b.onclick=()=>openBrief());
-document.querySelectorAll('.plan-place').forEach(b=>b.onclick=()=>openBrief(b.dataset.place));
-closeModal.onclick=closeBrief;modal.onclick=e=>{if(e.target===modal)closeBrief()};
-sendWa.onclick=()=>{const n=name.value.trim(),p=phone.value.trim();if(!n||!p){alert('Please add your name and phone / WhatsApp number.');return}const msg='Hi MyTravel4Sure, I want to plan a holiday.%0AName: '+encodeURIComponent(n)+'%0APhone: '+encodeURIComponent(p)+'%0ADestination: '+encodeURIComponent(destination.value||'Need suggestions')+'%0AMood: '+encodeURIComponent(tripMood.value)+'%0ADates: '+encodeURIComponent(dates.value||'Flexible');window.open('https://wa.me/'+PHONE+'?text='+msg,'_blank','noopener')};
-
-const trips=[
-{place:'Kashmir',region:'India',moods:['mountain','romance'],dur:['3–4 nights','5–7 nights','8–10 nights'],travel:['2 travellers','Family','Friends group']},
-{place:'Goa',region:'India',moods:['beach','city','romance'],dur:['3–4 nights','5–7 nights'],travel:['2 travellers','Solo','Family','Friends group']},
-{place:'Kerala',region:'India',moods:['beach','mountain','romance'],dur:['5–7 nights','8–10 nights'],travel:['2 travellers','Family']},
-{place:'Rajasthan',region:'India',moods:['city','romance'],dur:['5–7 nights','8–10 nights'],travel:['2 travellers','Family','Friends group']},
-{place:'Andaman',region:'India',moods:['beach','romance'],dur:['5–7 nights','8–10 nights'],travel:['2 travellers','Family']},
-{place:'Maldives',region:'Abroad',moods:['beach','romance'],dur:['3–4 nights','5–7 nights'],travel:['2 travellers','Family']},
-{place:'Dubai',region:'Abroad',moods:['city','romance'],dur:['3–4 nights','5–7 nights'],travel:['2 travellers','Family','Friends group']},
-{place:'Bali',region:'Abroad',moods:['beach','city','romance'],dur:['5–7 nights','8–10 nights','10+ nights'],travel:['2 travellers','Solo','Friends group']},
-{place:'Thailand',region:'Abroad',moods:['beach','city','romance'],dur:['5–7 nights','8–10 nights'],travel:['2 travellers','Family','Friends group']},
-{place:'Singapore',region:'Abroad',moods:['city'],dur:['3–4 nights','5–7 nights'],travel:['2 travellers','Family']}
-];
-function score(t,m,d,tr){return (m==='all'?2:t.moods.includes(m)?5:0)+(t.dur.includes(d)?3:0)+(t.travel.includes(tr)?2:0)}
-matchBtn.onclick=()=>{const m=mood.value,d=duration.value,tr=travellers.value,o=origin.value.trim()||'Delhi';const ranked=trips.map(t=>({...t,s:score(t,m,d,tr)})).sort((a,b)=>b.s-a.s).slice(0,6);matchTitle.textContent=ranked[0].place+' leads your shortlist';matchSub.textContent='Best fits for '+d.toLowerCase()+' from '+o+'.';matchList.innerHTML=ranked.map((t,i)=>'<div class="match-row"><div><b>'+(i===0?'★ ':'')+t.place+'</b><small>'+t.region+'</small></div><button data-place="'+t.place+'">Plan</button></div>').join('');matchList.querySelectorAll('button').forEach(b=>b.onclick=()=>openBrief(b.dataset.place))};
-
-const chat=document.getElementById('chat'),chatBody=document.getElementById('chatBody');chatBtn.onclick=()=>chat.classList.toggle('open');chatClose.onclick=()=>chat.classList.remove('open');
-function addMsg(t,w='bot'){const d=document.createElement('div');d.className='msg '+w;d.textContent=t;chatBody.appendChild(d);chatBody.scrollTop=chatBody.scrollHeight}
-function bot(q){const low=q.toLowerCase();if(/whatsapp|contact|phone/.test(low)){addMsg('Call +91 98109 58069 or use the WhatsApp button.');return}let region=/abroad|international/.test(low)?'Abroad':(/india|domestic/.test(low)?'India':null);let m=/honeymoon|romantic/.test(low)?'romance':/beach|island/.test(low)?'beach':/mountain|hill|nature/.test(low)?'mountain':/city|shopping/.test(low)?'city':'all';let arr=trips.filter(t=>!region||t.region===region).map(t=>({...t,s:score(t,m,'5–7 nights','2 travellers')})).sort((a,b)=>b.s-a.s).slice(0,5);addMsg('Best fits: '+arr.map(x=>x.place).join(', ')+'. Tap Plan in the trip matcher or open the holiday brief to continue.')}
-chatSend.onclick=()=>{const q=chatInput.value.trim();if(!q)return;addMsg(q,'user');chatInput.value='';setTimeout(()=>bot(q),180)};chatInput.onkeydown=e=>{if(e.key==='Enter')chatSend.click()};
-</script>
-
-<script id="cinema-v2-js">
-const topbar=document.querySelector('.topbar'),glow=document.getElementById('cursorGlow'),wipe=document.getElementById('sceneWipe');
-let lastY=scrollY,raf=0;
-document.querySelectorAll('.cinema-index button').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.go)?.scrollIntoView({behavior:'smooth'}));
-if(matchMedia('(pointer:fine)').matches){addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'})}else glow.style.display='none';
-function cinematicTick(){
- const y=scrollY,vh=innerHeight;
- topbar.classList.toggle('scrolled',y>40);
- document.querySelectorAll('.scene').forEach((s,i)=>{
-  const r=s.getBoundingClientRect(), p=Math.max(-1,Math.min(1,(vh/2-(r.top+r.height/2))/vh));
-  const bg=s.querySelector('.bg'),inner=s.querySelector('.scene-inner');
-  if(bg) bg.style.transform='scale('+(1.08-Math.abs(p)*.025)+') translate3d(0,'+(p*42)+'px,0)';
-  if(inner) inner.style.transform='translate3d(0,'+(p*-26)+'px,0)';
- });
- const reel=document.querySelector('.destination-reel'),track=reel?.querySelector('.reel-track');
- if(reel&&track&&innerWidth>900){const r=reel.getBoundingClientRect(), prog=Math.max(0,Math.min(1,(vh-r.top)/(r.height+vh)));track.style.setProperty('--reel-x',(-prog*Math.max(0,track.scrollWidth-innerWidth*.76))+'px')}
- const anchors=['home','scene2','scene3','destinations','planner'];let best=anchors[0],dist=1e9;
- anchors.forEach(id=>{const el=document.getElementById(id);if(el){const d=Math.abs(el.getBoundingClientRect().top-vh*.28);if(d<dist){dist=d;best=id}}});
- document.querySelectorAll('.cinema-index button').forEach(b=>b.classList.toggle('on',b.dataset.go===best));
- lastY=y;raf=0;
-}
-addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(cinematicTick)},{passive:true});addEventListener('resize',cinematicTick);cinematicTick();
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',()=>{wipe.animate([{transform:'translateX(-120%)'},{transform:'translateX(120%)'}],{duration:900,easing:'cubic-bezier(.16,1,.3,1)'})}));
-</script></body>
-</html>
+const clamp=(n,a=0,b=1)=>Math.max(a,Math.min(b,n));const hero=document.querySelector('.hero'),journey=document.querySelector('.journey'),places=[...document.querySelectorAll('.place')],bar=document.getElementById('progress');
+function frame(){let h=hero.getBoundingClientRect(),p=clamp(-h.top/(h.height-innerHeight));a.style.transform='scale('+(1.08-p*.12)+') translateY('+(p*-4)+'%)';b.style.clipPath='inset(0 0 0 '+(100-clamp((p-.18)/.34)*100)+'%)';b.style.transform='scale('+(1.12-clamp((p-.18)/.34)*.12)+')';c.style.clipPath='circle('+(clamp((p-.58)/.35)*78)+'% at 78% 48%)';c.style.transform='scale('+(1.15-clamp((p-.58)/.35)*.15)+')';heroCopy.style.transform='translateY('+(p*-70)+'px)';heroCopy.style.opacity=1-clamp((p-.7)/.25);ring.style.transform='rotate('+(p*160)+'deg) scale('+(1+p*.18)+')';let j=journey.getBoundingClientRect(),jp=clamp(-j.top/(j.height-innerHeight)),idx=Math.min(3,Math.floor(jp*4));places.forEach((el,i)=>{el.classList.toggle('on',i===idx);let local=clamp(jp*4-i);el.style.transform='scale('+(1.16-local*.16)+')';el.style.clipPath=i===idx?'inset(0 0 0 0)':'inset(0 0 0 100%)'});bar.style.width=(scrollY/(document.documentElement.scrollHeight-innerHeight)*100)+'%';requestAnimationFrame(frame)}requestAnimationFrame(frame);
+const modal=document.getElementById('modal'),dest=document.getElementById('dest');function openM(place=''){modal.classList.add('on');dest.value=place}document.querySelectorAll('.open').forEach(x=>x.onclick=()=>openM());document.querySelectorAll('.pick').forEach(x=>x.onclick=()=>openM(x.dataset.place));close.onclick=()=>modal.classList.remove('on');modal.onclick=e=>{if(e.target===modal)modal.classList.remove('on')};
+const PHONE='919810958069';function goWa(msg){window.open('https://wa.me/'+PHONE+'?text='+encodeURIComponent(msg),'_blank','noopener')}brief.onclick=()=>goWa('Hi MyTravel4Sure, I want to plan a holiday.\nFrom: '+from.value+'\nMood: '+mood.value+'\nDuration: '+days.value+'\nDestination: '+(where.value||'Please suggest'));wa.onclick=()=>{if(!name.value.trim()||!phone.value.trim()){alert('Please add your name and phone / WhatsApp number.');return}goWa('Hi MyTravel4Sure, I want to plan a holiday.\nName: '+name.value+'\nPhone: '+phone.value+'\nDestination: '+(dest.value||'Please suggest')+'\nTrip: '+type.value)};
+</script></body></html>
