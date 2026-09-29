@@ -3,145 +3,104 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0a1820">
-<meta name="description" content="MyTravel4Sure — enter a destination before you book it.">
+<meta name="theme-color" content="#071218">
+<meta name="description" content="MyTravel4Sure — enter a destination before you book it. An immersive spatial travel preview.">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="MyTravel4Sure — Enter the Destination">
+<meta property="og:description" content="Choose a place and step inside its atmosphere before you plan the trip.">
+<meta property="og:type" content="website">
 <title>MyTravel4Sure — Enter the Destination</title>
 <link rel="icon" href="assets/mytravel4sure-logo.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
-<style>
-:root{--accent:#80d7e8;--accent2:#ffe58a;--ink:#f7fbff;--ease:cubic-bezier(.18,.82,.18,1);--px:0;--py:0}
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;background:#07141a;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow:hidden}
-button,input,select{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}
-button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #fff;outline-offset:3px}
-#app{position:relative;width:100%;height:100svh;overflow:hidden;background:#07141a}
-.world{position:absolute;inset:0;isolation:isolate}
-.scene{position:absolute;inset:-5%;background-size:cover;background-position:center;opacity:0;transform:translate3d(calc(var(--px)*-18px),calc(var(--py)*-12px),0) scale(1.095);transition:opacity 1.5s var(--ease),transform 1.2s var(--ease),filter 1.4s var(--ease);will-change:transform,opacity;filter:saturate(1.04) contrast(1.02)}
-.scene.active{opacity:1}
-.scene::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 38%,transparent 0 26%,rgba(0,0,0,.1) 58%,rgba(3,12,18,.55) 100%),linear-gradient(90deg,rgba(3,12,18,.55),transparent 44%,rgba(3,12,18,.1)),linear-gradient(0deg,rgba(3,12,18,.72),transparent 34%,rgba(3,12,18,.14))}
-#fx{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none;mix-blend-mode:screen;opacity:.88}
-.depth{position:absolute;inset:-8%;z-index:3;pointer-events:none;background:radial-gradient(circle at calc(50% + var(--px)*8%) calc(50% + var(--py)*6%),transparent 0 22%,rgba(0,0,0,.08) 50%,rgba(0,0,0,.32) 90%);transform:translate3d(calc(var(--px)*7px),calc(var(--py)*5px),0);transition:background .3s linear}
-.grain{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:.12;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitchTiles'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")}
-.caustics{position:absolute;inset:-20%;z-index:3;pointer-events:none;opacity:0;background:repeating-radial-gradient(ellipse at 50% 120%,rgba(103,240,255,.13) 0 1px,transparent 2px 35px);animation:caustic 12s linear infinite;transition:opacity 1s}
-body[data-fx="ocean"] .caustics{opacity:.7}
-@keyframes caustic{to{transform:translate3d(2%,-3%,0) rotate(2deg)}}
-.topbar{position:absolute;z-index:40;left:28px;right:28px;top:20px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand{display:flex;align-items:center;gap:14px}.brand img{width:178px;height:52px;object-fit:contain;background:rgba(255,255,255,.94);border-radius:999px;padding:7px 14px;box-shadow:0 14px 40px rgba(0,0,0,.16)}
-.system{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:800}
-.actions{display:flex;align-items:center;gap:8px}.ghost,.primary{border:1px solid rgba(255,255,255,.28);color:#fff;background:rgba(7,20,26,.26);backdrop-filter:blur(18px) saturate(150%);border-radius:999px;padding:12px 16px;font-size:12px;font-weight:850;letter-spacing:.02em;transition:.3s var(--ease)}
-.ghost:hover{background:rgba(255,255,255,.13);transform:translateY(-2px)}.primary{border:0;background:#fff;color:#0a1d25;padding-inline:19px}.primary:hover{transform:translateY(-2px) scale(1.02)}
-.hud{position:absolute;inset:0;z-index:20;pointer-events:none}
-.heroText{position:absolute;left:6vw;bottom:19vh;width:min(1040px,84vw);transition:opacity .65s,transform .85s var(--ease)}
-.kicker{display:flex;align-items:center;gap:12px;font-size:10px;font-weight:900;letter-spacing:.26em;text-transform:uppercase;color:rgba(255,255,255,.78)}.kicker::before{content:"";width:44px;height:1px;background:var(--accent)}
-.heroText h1{margin:14px 0 14px;font-size:clamp(68px,10.2vw,166px);line-height:.78;letter-spacing:-.08em;text-transform:uppercase;text-wrap:balance;text-shadow:0 12px 50px rgba(0,0,0,.28)}
-.heroText h1 em{display:block;font-family:Georgia,"Times New Roman",serif;text-transform:none;font-size:.54em;letter-spacing:-.055em;font-weight:400;color:var(--accent2);margin-left:14vw;margin-top:.13em}
-.heroText p{max-width:585px;font-size:15px;line-height:1.7;color:rgba(255,255,255,.78);margin:0;text-shadow:0 4px 25px rgba(0,0,0,.35)}
-.meta{position:absolute;right:3vw;top:28vh;width:220px;text-align:right;color:rgba(255,255,255,.72)}.meta .label{font-size:9px;letter-spacing:.24em;text-transform:uppercase}.meta .big{font-size:20px;font-weight:800;margin:7px 0 4px}.meta .line{height:1px;background:rgba(255,255,255,.28);margin:16px 0}.meta small{font-size:11px;line-height:1.55}
-.look{position:absolute;right:3vw;bottom:17vh;font-size:9px;letter-spacing:.21em;text-transform:uppercase;color:rgba(255,255,255,.56)}
-.look::before{content:"";display:inline-block;width:7px;height:7px;border:1px solid #fff;border-radius:50%;margin-right:9px;animation:pulse 1.8s ease-in-out infinite}@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(255,255,255,.08)}}
-.sceneRail{position:absolute;z-index:35;left:4vw;right:4vw;bottom:3vh;display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid rgba(255,255,255,.26);pointer-events:auto}
-.sceneBtn{position:relative;border:0;background:transparent;color:#fff;padding:16px 18px 11px;text-align:left;min-width:0}.sceneBtn::before{content:"";position:absolute;left:0;top:-1px;width:0;height:2px;background:var(--accent);transition:.7s var(--ease)}.sceneBtn.active::before{width:100%}.sceneBtn span{display:block;font-size:9px;letter-spacing:.19em;text-transform:uppercase;color:rgba(255,255,255,.52);margin-bottom:5px}.sceneBtn b{font-size:13px}.sceneBtn:hover{background:rgba(255,255,255,.05)}
-.destinationDock{position:absolute;z-index:45;left:50%;top:50%;transform:translate(-50%,-50%);width:min(900px,86vw);pointer-events:auto;transition:opacity .6s,transform .8s var(--ease)}
-.destinationDock.hidden{opacity:0;transform:translate(-50%,-42%) scale(.96);pointer-events:none}
-.dockIntro{font-size:10px;letter-spacing:.28em;text-transform:uppercase;text-align:center;color:rgba(255,255,255,.76);font-weight:900}.dockTitle{text-align:center;font-size:clamp(50px,7vw,100px);line-height:.88;letter-spacing:-.07em;margin:15px 0 45px;text-shadow:0 15px 60px rgba(0,0,0,.35)}.dockTitle em{font-family:Georgia,serif;font-weight:400;color:var(--accent2)}
-.destinations{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.28);border-bottom:1px solid rgba(255,255,255,.28)}
-.destBtn{border:0;border-right:1px solid rgba(255,255,255,.22);background:rgba(7,20,26,.18);backdrop-filter:blur(12px);color:#fff;padding:22px 14px;text-align:left;transition:.35s var(--ease)}.destBtn:last-child{border-right:0}.destBtn:hover{background:rgba(255,255,255,.12);transform:translateY(-5px)}.destBtn span{font-size:9px;letter-spacing:.18em;color:rgba(255,255,255,.55)}.destBtn strong{display:block;font-size:24px;letter-spacing:-.04em;margin-top:7px}.destBtn small{display:block;margin-top:7px;color:rgba(255,255,255,.62);font-size:11px}
-.reopen{position:absolute;z-index:35;left:28px;top:50%;transform:translateY(-50%) rotate(-90deg);transform-origin:left top;pointer-events:auto;border:0;background:transparent;color:rgba(255,255,255,.7);font-size:9px;letter-spacing:.23em;text-transform:uppercase}
-.portal{position:absolute;inset:0;z-index:60;pointer-events:none;background:#f5eee3;clip-path:circle(0 at 50% 50%);transition:clip-path .72s var(--ease)}.portal.in{clip-path:circle(80% at 50% 50%)}.portalWord{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:clamp(55px,10vw,160px);font-weight:900;letter-spacing:-.08em;text-transform:uppercase;color:#10242c;opacity:0;transition:opacity .25s}.portal.in .portalWord{opacity:1}
-.tripPanel{position:absolute;z-index:80;right:0;top:0;height:100%;width:min(520px,100%);background:rgba(242,239,232,.94);backdrop-filter:blur(26px);color:#102d36;transform:translateX(102%);transition:transform .75s var(--ease);padding:28px;overflow:auto}.tripPanel.open{transform:translateX(0)}.tripTop{display:flex;align-items:center;justify-content:space-between;gap:20px}.tripTop img{width:150px}.x{border:1px solid #16394633;background:transparent;width:42px;height:42px;border-radius:50%;font-size:20px}.tripPanel h2{font-size:clamp(48px,5vw,72px);line-height:.88;letter-spacing:-.06em;margin:58px 0 15px}.tripPanel>p{color:#526a72;line-height:1.65}.formLine{border-top:1px solid #15394630;padding:18px 0;display:grid;grid-template-columns:32px 1fr;gap:12px}.formLine b{font-size:10px;color:#2fa8ad}.formLine label{font-weight:800;font-size:13px}.formLine input,.formLine select{grid-column:2;border:0;border-bottom:1px solid #173b49;background:transparent;padding:10px 0;font-size:17px;color:#153946;outline:0}.wa{width:100%;border:0;background:#0e8f7c;color:#fff;border-radius:999px;padding:16px 18px;font-weight:900;margin-top:16px}.tiny{font-size:10px;color:#6d7f85;margin-top:10px;text-align:center}
-.soundWave{display:inline-flex;gap:2px;align-items:center;margin-right:7px}.soundWave i{display:block;width:2px;height:8px;background:currentColor;animation:eq .8s ease-in-out infinite alternate}.soundWave i:nth-child(2){animation-delay:.2s;height:12px}.soundWave i:nth-child(3){animation-delay:.4s;height:6px}@keyframes eq{to{transform:scaleY(.35)}}
-body:not(.sound-on) .soundWave i{animation:none;height:3px}
-@media(max-width:820px){
-.topbar{left:12px;right:12px;top:10px}.brand img{width:142px;height:45px}.system{display:none}.ghost{display:none}.primary{padding:11px 14px}
-.heroText{left:18px;bottom:22vh;width:calc(100vw - 36px)}.heroText h1{font-size:21vw;line-height:.8}.heroText h1 em{margin-left:0;font-size:.58em;margin-top:.18em}.heroText p{font-size:13px;max-width:88%}.meta{display:none}.look{right:14px;bottom:19vh}
-.sceneRail{left:12px;right:12px;bottom:2vh;overflow-x:auto;display:flex;scrollbar-width:none}.sceneRail::-webkit-scrollbar{display:none}.sceneBtn{min-width:58vw;padding:13px 12px}
-.destinationDock{width:calc(100vw - 24px)}.dockTitle{font-size:15vw;margin-bottom:30px}.destinations{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.destinations::-webkit-scrollbar{display:none}.destBtn{min-width:68vw;scroll-snap-align:center;padding:20px}.reopen{display:none}.tripPanel{padding:20px}.tripPanel h2{margin-top:45px}.scene{inset:-9%}
-}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important}.scene{transform:none!important}}
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
-<body data-fx="snow">
-<div id="app">
-  <div class="world" id="world">
-    <div class="scene active" id="sceneA"></div>
-    <div class="scene" id="sceneB"></div>
-    <canvas id="fx"></canvas>
-    <div class="caustics"></div><div class="depth"></div><div class="grain"></div>
+<body>
+<canvas id="webgl" aria-hidden="true"></canvas>
+<div class="vignette"></div><div class="grain"></div><div class="scan"></div>
+
+<div class="loader">
+  <div class="loader-inner">
+    <img class="loader-logo" src="assets/mytravel4sure-logo.png" alt="MyTravel4Sure">
+    <div class="loader-label">Preparing destination space</div>
+    <div class="loader-track"><div class="loader-bar"></div></div>
+    <div class="loader-percent">0%</div>
   </div>
-  <div class="topbar">
-    <div class="brand"><img src="assets/mytravel4sure-logo.png" alt="MyTravel4Sure"><span class="system">Spatial Travel Preview / 2036 Concept</span></div>
-    <div class="actions"><button class="ghost" id="sound"><span class="soundWave"><i></i><i></i><i></i></span>Soundscape</button><button class="primary openTrip">Build this journey</button></div>
-  </div>
-  <div class="hud">
-    <div class="heroText" id="heroText"><div class="kicker" id="kicker">KASHMIR / INDIA / SCENE 01</div><h1 id="title">KASHMIR<em id="script">closer to the sky.</em></h1><p id="desc">Cold air, glassy water and mountains that make the rest of the world feel very far away.</p></div>
-    <div class="meta"><div class="label">CURRENT ATMOSPHERE</div><div class="big" id="moodMeta">Snow / Stillness</div><div class="line"></div><small id="metaCopy">Move your cursor or phone to look through the scene. Choose a moment below to travel deeper.</small></div>
-    <div class="look">MOVE / SWIPE TO LOOK AROUND</div>
-  </div>
-  <div class="sceneRail" id="sceneRail"></div>
-  <button class="reopen" id="reopen">Change destination</button>
-  <div class="destinationDock" id="dock">
-    <div class="dockIntro">MYTRAVEL4SURE / DESTINATION PORTAL</div>
-    <div class="dockTitle">Where do you want to <em>feel</em> first?</div>
-    <div class="destinations">
-      <button class="destBtn" data-dest="kashmir"><span>01 / INDIA</span><strong>Kashmir</strong><small>snow · lake · alpine silence</small></button>
-      <button class="destBtn" data-dest="maldives"><span>02 / INDIAN OCEAN</span><strong>Maldives</strong><small>water · reef · barefoot time</small></button>
-      <button class="destBtn" data-dest="bali"><span>03 / INDONESIA</span><strong>Bali</strong><small>jungle · ritual · sunset</small></button>
-      <button class="destBtn" data-dest="dubai"><span>04 / UAE</span><strong>Dubai</strong><small>desert · future · after dark</small></button>
+</div>
+
+<div class="ui">
+  <header class="topbar">
+    <div class="brand">
+      <img src="assets/mytravel4sure-logo.png" alt="MyTravel4Sure">
+      <span class="system-id">IMMERSIVE TRAVEL PREVIEW / SPATIAL EXPERIENCE</span>
     </div>
+    <div class="top-actions">
+      <button class="pill secondary" id="sound"><span class="sound-bars"><i></i><i></i><i></i></span>Atmosphere</button>
+      <button class="pill primary open-trip">Build this journey</button>
+    </div>
+  </header>
+
+  <div class="status"><i></i><span id="statusText">DESTINATION PORTAL READY</span></div>
+
+  <main class="copy">
+    <div class="eyebrow" id="eyebrow">KASHMIR / INDIA / SCENE 01</div>
+    <h1 id="title">KASHMIR<em id="script">closer to the sky.</em></h1>
+    <p id="sceneCopy">Cold air, glassy water and mountains that make the rest of the world feel very far away.</p>
+  </main>
+
+  <aside class="side-meta">
+    <div class="micro">CURRENT ATMOSPHERE</div>
+    <strong id="mood">ALPINE / STILL / COLD LIGHT</strong>
+    <div class="rule"></div>
+    <p>Move through the view with your cursor or touch. Scroll or swipe to travel between moments.</p>
+  </aside>
+
+  <div class="crosshair"></div>
+
+  <div class="scene-rail" aria-label="Destination scenes"></div>
+
+  <section class="destination-orbit" aria-label="Choose a destination">
+    <div class="orbit-kicker">MYTRAVEL4SURE / DESTINATION PORTAL</div>
+    <div class="orbit-title">Don't browse a place.<br><em>Enter it.</em></div>
+    <div class="dest-list">
+      <button class="dest" data-dest="kashmir"><small>01 / INDIA</small><strong>Kashmir</strong><em>snow · lake · alpine silence</em></button>
+      <button class="dest" data-dest="maldives"><small>02 / INDIAN OCEAN</small><strong>Maldives</strong><em>lagoon · reef · barefoot time</em></button>
+      <button class="dest" data-dest="bali"><small>03 / INDONESIA</small><strong>Bali</strong><em>jungle · ritual · warm air</em></button>
+      <button class="dest" data-dest="dubai"><small>04 / UAE</small><strong>Dubai</strong><em>desert · future · after dark</em></button>
+    </div>
+  </section>
+
+  <button class="change-destination">Change destination</button>
+
+  <div class="hotspot" aria-hidden="false">
+    <button aria-label="Travel deeper into this destination"></button>
+    <span class="hotspot-label">ENTER NEXT SCENE</span>
   </div>
-  <div class="portal" id="portal"><div class="portalWord" id="portalWord">KASHMIR</div></div>
-  <aside class="tripPanel" id="trip">
-    <div class="tripTop"><img src="assets/mytravel4sure-logo.png" alt=""><button class="x" id="closeTrip">×</button></div>
+
+  <div class="portal"><div class="portal-word">KASHMIR</div></div>
+
+  <aside class="trip-panel" aria-label="Build your trip">
+    <div class="trip-head">
+      <img src="assets/mytravel4sure-logo.png" alt="MyTravel4Sure">
+      <button class="trip-close" aria-label="Close trip planner">×</button>
+    </div>
     <h2>Turn the feeling into a trip.</h2>
-    <p>Your selected world is already carried into the brief. Add the practical details and continue directly with MyTravel4Sure on WhatsApp.</p>
-    <div class="formLine"><b>01</b><label>Destination</label><input id="fDest" readonly></div>
-    <div class="formLine"><b>02</b><label>Starting city</label><input id="fFrom" value="Delhi"></div>
-    <div class="formLine"><b>03</b><label>Travel style</label><select id="fStyle"><option>Couple / honeymoon</option><option>Family holiday</option><option>Friends trip</option><option>Solo escape</option></select></div>
-    <div class="formLine"><b>04</b><label>Duration</label><select id="fDays"><option>3–4 nights</option><option>5–7 nights</option><option>8–10 nights</option><option>10+ nights</option></select></div>
-    <div class="formLine"><b>05</b><label>Name</label><input id="fName" placeholder="Your name"></div>
-    <div class="formLine"><b>06</b><label>Phone / WhatsApp</label><input id="fPhone" placeholder="+91…"></div>
-    <button class="wa" id="wa">Continue on WhatsApp →</button><div class="tiny">No payment is taken on this screen.</div>
+    <p>The destination and the visual moment you selected are carried into your enquiry automatically. Add the practical details and continue on WhatsApp.</p>
+    <div class="field"><b>01</b><label for="fDest">Destination</label><input id="fDest" value="KASHMIR" readonly></div>
+    <div class="field"><b>02</b><label for="fFrom">Starting city</label><input id="fFrom" value="Delhi"></div>
+    <div class="field"><b>03</b><label for="fStyle">Travel style</label><select id="fStyle"><option>Couple / honeymoon</option><option>Family holiday</option><option>Friends trip</option><option>Solo escape</option></select></div>
+    <div class="field"><b>04</b><label for="fDays">Duration</label><select id="fDays"><option>3–4 nights</option><option>5–7 nights</option><option>8–10 nights</option><option>10+ nights</option></select></div>
+    <div class="field"><b>05</b><label for="fName">Name</label><input id="fName" autocomplete="name" placeholder="Your name"></div>
+    <div class="field"><b>06</b><label for="fPhone">Phone / WhatsApp</label><input id="fPhone" autocomplete="tel" inputmode="tel" placeholder="+91…"></div>
+    <button class="whatsapp" id="whatsapp">Continue on WhatsApp →</button>
+    <div class="fine">No payment is taken on this screen.</div>
   </aside>
 </div>
-<script>
-const data={
-kashmir:{name:'KASHMIR',country:'INDIA',accent:'#b9ecff',accent2:'#f0fbff',fx:'snow',mood:'Snow / Stillness',script:'closer to the sky.',desc:'Cold air, glassy water and mountains that make the rest of the world feel very far away.',scenes:[
-{label:'DAL LAKE',sub:'Drift into morning',img:'https://images.unsplash.com/photo-1598091383021-15ddea10925d?auto=format&fit=crop&w=2400&q=92',desc:'Wake to water, cedar silhouettes and a morning that arrives quietly.'},
-{label:'GULMARG',sub:'Walk into white',img:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2400&q=92',desc:'Trade city noise for alpine air, snow fields and long mountain light.'},
-{label:'PAHALGAM',sub:'Follow the valley',img:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2400&q=92',desc:'Move slower through pine, river bends and open valley roads.'}]},
-maldives:{name:'MALDIVES',country:'INDIAN OCEAN',accent:'#5cf2ef',accent2:'#ffe986',fx:'ocean',mood:'Water / Weightless',script:'where time floats.',desc:'A world reduced to warm water, open horizon and the feeling of having nowhere else to be.',scenes:[
-{label:'LAGOON',sub:'Arrive over water',img:'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=2400&q=92',desc:'Step out above a lagoon and let the horizon become the room.'},
-{label:'REEF',sub:'Go below the blue',img:'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=2400&q=92',desc:'Trade gravity for reef light, clear water and slow underwater colour.'},
-{label:'SUNSET',sub:'Stay for the last light',img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2400&q=92',desc:'Let the day end with salt air, a long shoreline and almost no agenda.'}]},
-bali:{name:'BALI',country:'INDONESIA',accent:'#8affbc',accent2:'#ffd37b',fx:'firefly',mood:'Jungle / Ritual',script:'breathe differently.',desc:'Green mornings, temple smoke and salt air — a softer rhythm between jungle and sea.',scenes:[
-{label:'JUNGLE',sub:'Wake under green',img:'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2400&q=92',desc:'Begin inside dense green where the air feels slower and everything sounds alive.'},
-{label:'TEMPLE',sub:'Enter the ritual',img:'https://images.unsplash.com/photo-1539367628448-4bc5c9d171c8?auto=format&fit=crop&w=2400&q=92',desc:'Move through stone, incense and the quiet choreography of an island morning.'},
-{label:'COAST',sub:'Chase the last sun',img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2400&q=92',desc:'Finish where warm air meets surf and the light keeps changing until dark.'}]},
-dubai:{name:'DUBAI',country:'UAE',accent:'#ffc766',accent2:'#ff8d6a',fx:'dust',mood:'Desert / Future',script:'tomorrow after dark.',desc:'Desert silence, impossible skylines and a city that can change tempo in a single turn.',scenes:[
-{label:'DESERT',sub:'Cross the gold',img:'https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=2400&q=92',desc:'Start outside the city where wind and dunes erase almost every straight line.'},
-{label:'SKYLINE',sub:'Enter the future',img:'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2400&q=92',desc:'Move from desert scale into glass, light and a skyline built to feel impossible.'},
-{label:'NIGHT',sub:'Stay after dark',img:'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=2400&q=92',desc:'When the heat drops, the city becomes reflections, motion and late-night energy.'}]}
-};
-let dest='kashmir',sceneIndex=0,front='A',transitioning=false,particles=[],audio=null,soundOn=false;
-const A=document.getElementById('sceneA'),B=document.getElementById('sceneB'),dock=document.getElementById('dock'),portal=document.getElementById('portal'),portalWord=document.getElementById('portalWord');
-const title=document.getElementById('title'),script=document.getElementById('script'),desc=document.getElementById('desc'),kicker=document.getElementById('kicker'),moodMeta=document.getElementById('moodMeta'),rail=document.getElementById('sceneRail');
-function setVars(d){document.documentElement.style.setProperty('--accent',d.accent);document.documentElement.style.setProperty('--accent2',d.accent2);document.body.dataset.fx=d.fx}
-function sceneBg(el,url){el.style.backgroundImage="url('"+url+"')"}
-function renderRail(){rail.innerHTML='';data[dest].scenes.forEach((s,i)=>{const b=document.createElement('button');b.className='sceneBtn'+(i===sceneIndex?' active':'');b.innerHTML='<span>0'+(i+1)+' / '+data[dest].name+'</span><b>'+s.label+' — '+s.sub+'</b>';b.onclick=()=>changeScene(i);rail.appendChild(b)})}
-function changeScene(i,instant=false){if(i===sceneIndex&&!instant)return;sceneIndex=i;const d=data[dest],s=d.scenes[i],next=front==='A'?B:A,old=front==='A'?A:B;sceneBg(next,s.img);if(instant){sceneBg(old,s.img)}next.classList.add('active');old.classList.remove('active');front=front==='A'?'B':'A';desc.textContent=s.desc;kicker.textContent=d.name+' / '+d.country+' / SCENE 0'+(i+1);renderRail();seedParticles()}
-function enterDestination(id){if(transitioning)return;transitioning=true;const d=data[id];portalWord.textContent=d.name;portal.classList.add('in');setTimeout(()=>{dest=id;sceneIndex=0;setVars(d);title.firstChild&&title.removeChild(title.firstChild);title.insertBefore(document.createTextNode(d.name),script);script.textContent=d.script;desc.textContent=d.desc;moodMeta.textContent=d.mood;document.getElementById('fDest').value=d.name;sceneBg(front==='A'?B:A,d.scenes[0].img);(front==='A'?B:A).classList.add('active');(front==='A'?A:B).classList.remove('active');front=front==='A'?'B':'A';renderRail();seedParticles();dock.classList.add('hidden');setTimeout(()=>portal.classList.remove('in'),160);setTimeout(()=>transitioning=false,820)},360)}
-document.querySelectorAll('.destBtn').forEach(b=>b.onclick=()=>enterDestination(b.dataset.dest));document.getElementById('reopen').onclick=()=>dock.classList.remove('hidden');
-setVars(data[dest]);sceneBg(A,data[dest].scenes[0].img);renderRail();document.getElementById('fDest').value=data[dest].name;
-let tx=0,ty=0,cx=0,cy=0;function aim(x,y){tx=(x/innerWidth-.5)*2;ty=(y/innerHeight-.5)*2}addEventListener('pointermove',e=>aim(e.clientX,e.clientY),{passive:true});addEventListener('touchmove',e=>{if(e.touches[0])aim(e.touches[0].clientX,e.touches[0].clientY)},{passive:true});
-function motion(){cx+=(tx-cx)*.045;cy+=(ty-cy)*.045;document.documentElement.style.setProperty('--px',cx.toFixed(3));document.documentElement.style.setProperty('--py',cy.toFixed(3));requestAnimationFrame(motion)}motion();
-const canvas=document.getElementById('fx'),ctx=canvas.getContext('2d');function resize(){const dpr=Math.min(devicePixelRatio||1,2);canvas.width=innerWidth*dpr;canvas.height=innerHeight*dpr;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';ctx.setTransform(dpr,0,0,dpr,0,0);seedParticles()}addEventListener('resize',resize);
-function seedParticles(){particles=[];const mode=data[dest].fx,count=innerWidth<700?55:100;for(let i=0;i<count;i++){particles.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*2.5+.4,vx:(Math.random()-.5)*.45,vy:Math.random()*1.1+.15,a:Math.random()*.65+.2,p:Math.random()*6.28})}}
-function drawFx(t){ctx.clearRect(0,0,innerWidth,innerHeight);const mode=data[dest].fx;for(const p of particles){if(mode==='snow'){p.y+=p.vy;p.x+=Math.sin(t*.0007+p.p)*.45;if(p.y>innerHeight+5){p.y=-5;p.x=Math.random()*innerWidth}ctx.fillStyle='rgba(255,255,255,'+p.a+')';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill()}else if(mode==='ocean'){p.y-=p.vy*.35;p.x+=Math.sin(t*.001+p.p)*.18;if(p.y<-10){p.y=innerHeight+10;p.x=Math.random()*innerWidth}ctx.strokeStyle='rgba(130,246,255,'+(p.a*.5)+')';ctx.lineWidth=.8;ctx.beginPath();ctx.arc(p.x,p.y,p.r*1.4,0,Math.PI*2);ctx.stroke()}else if(mode==='firefly'){p.x+=Math.cos(t*.0006+p.p)*.16;p.y+=Math.sin(t*.0008+p.p)*.12;const a=(.25+.65*(.5+.5*Math.sin(t*.002+p.p)))*p.a;ctx.fillStyle='rgba(255,220,108,'+a+')';ctx.shadowBlur=12;ctx.shadowColor='#ffe27f';ctx.beginPath();ctx.arc(p.x,p.y,p.r*.75,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0}else{p.x+=p.vy*.45;p.y+=Math.sin(t*.0009+p.p)*.18;if(p.x>innerWidth+10){p.x=-10;p.y=Math.random()*innerHeight}ctx.fillStyle='rgba(255,190,98,'+(p.a*.45)+')';ctx.fillRect(p.x,p.y,p.r*1.6,.7)}}requestAnimationFrame(drawFx)}resize();requestAnimationFrame(drawFx);
-const trip=document.getElementById('trip');document.querySelectorAll('.openTrip').forEach(b=>b.onclick=()=>trip.classList.add('open'));document.getElementById('closeTrip').onclick=()=>trip.classList.remove('open');
-document.getElementById('wa').onclick=()=>{const n=document.getElementById('fName').value.trim(),p=document.getElementById('fPhone').value.trim();if(!n||!p){alert('Please add your name and phone / WhatsApp number.');return}const msg='Hi MyTravel4Sure, I want to plan '+data[dest].name+'.\nName: '+n+'\nPhone: '+p+'\nFrom: '+document.getElementById('fFrom').value+'\nTravel style: '+document.getElementById('fStyle').value+'\nDuration: '+document.getElementById('fDays').value+'\nVisual I liked: '+data[dest].scenes[sceneIndex].label;window.open('https://wa.me/919810958069?text='+encodeURIComponent(msg),'_blank','noopener')};
-function startSound(){if(soundOn){if(audio){audio.close();audio=null}soundOn=false;document.body.classList.remove('sound-on');return}const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;audio=new AC();const master=audio.createGain();master.gain.value=.045;master.connect(audio.destination);const osc=audio.createOscillator(),g=audio.createGain();osc.type='sine';osc.frequency.value=data[dest].fx==='ocean'?110:data[dest].fx==='snow'?82:data[dest].fx==='firefly'?146:98;g.gain.value=.16;osc.connect(g).connect(master);osc.start();const noise=audio.createBufferSource(),buf=audio.createBuffer(1,audio.sampleRate*2,audio.sampleRate),arr=buf.getChannelData(0);for(let i=0;i<arr.length;i++)arr[i]=(Math.random()*2-1)*.17;noise.buffer=buf;noise.loop=true;const filter=audio.createBiquadFilter();filter.type='lowpass';filter.frequency.value=data[dest].fx==='ocean'?700:420;noise.connect(filter).connect(master);noise.start();soundOn=true;document.body.classList.add('sound-on')}
-document.getElementById('sound').onclick=startSound;
-let startX=0;addEventListener('touchstart',e=>{if(e.touches[0])startX=e.touches[0].clientX},{passive:true});addEventListener('touchend',e=>{if(dock.classList.contains('hidden')&&e.changedTouches[0]){const dx=e.changedTouches[0].clientX-startX;if(Math.abs(dx)>70)changeScene((sceneIndex+(dx<0?1:2))%3)}},{passive:true});
-setInterval(()=>{if(dock.classList.contains('hidden')&&!trip.classList.contains('open')&&!document.hidden)changeScene((sceneIndex+1)%3)},9000);
-</script>
-</body></html>
+
+<div class="fallback">
+  <div><h2>Your browser can't open the spatial preview.</h2><p>Please use a recent version of Chrome, Edge, Safari or Firefox with hardware acceleration enabled.</p></div>
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
